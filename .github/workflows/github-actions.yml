@@ -15,7 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: |
-          yarn
+          npm install
           yarn serve
           yarn lint
   unit_test:
@@ -23,6 +23,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: |
-          yarn
+          npm
           yarn serve
           yarn test:unit
