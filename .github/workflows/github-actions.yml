@@ -2,7 +2,11 @@ name: GitHub Actions
 on: [push]
 jobs:
   Code-Coverage:
-    runs-on: node-latest
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
     steps:
-      - name: Jest coverage report
-        uses: ArtiomTr/jest-coverage-report-action@v1.3
+      - uses: actions/checkout@v1
+      - uses: artiomtr/jest-coverage-report-action@v2.0-rc.1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          package-manager: yarn
