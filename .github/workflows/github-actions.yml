@@ -1,4 +1,5 @@
 name: GitHub Actions
+on: push
 jobs:
   Code-Coverage:
     runs-on: ubuntu-latest
