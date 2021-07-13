@@ -1,0 +1,8 @@
+name: GitHub Actions
+on: [push]
+jobs:
+  Code-Coverage:
+    runs-on: node-latest
+    steps:
+      - name: Jest coverage report
+        uses: ArtiomTr/jest-coverage-report-action@v1.3
