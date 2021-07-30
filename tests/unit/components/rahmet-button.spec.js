@@ -1,8 +1,8 @@
 import { mount } from "@vue/test-utils";
-import Foo from "@/components/RahmetButton.vue";
+import RahmetButton from "@/components/RahmetButton.vue";
 
 test("contains classes based on props", () => {
-  const wrapper = mount(Foo, {
+  const wrapper = mount(RahmetButton, {
     propsData: {
       theme: "error",
       block: true,

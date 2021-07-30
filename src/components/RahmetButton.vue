@@ -41,12 +41,12 @@ export default {
       default: "normal",
     },
     /**
-     * Disable button
+     * Disable the button
      */
     disabled: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
 };
 </script>
