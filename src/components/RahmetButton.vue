@@ -7,6 +7,7 @@
       size !== 'normal' ? `rahmet-btn--${size}` : '',
     ]"
     :disabled="disabled"
+    @click="$emit('click')"
   >
     <!-- @slot Use this slot for default content -->
     <slot></slot>
@@ -48,6 +49,12 @@ export default {
       default: false,
     },
   },
+  emits: [
+    /**
+     * Triggers when the button is clicked
+     */
+    "click",
+  ],
 };
 </script>
 
