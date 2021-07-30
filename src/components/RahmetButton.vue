@@ -6,6 +6,7 @@
       { 'rahmet-btn--block': block },
       size !== 'normal' ? `rahmet-btn--${size}` : '',
     ]"
+    :disabled="disabled"
   >
     <!-- @slot Use this slot for default content -->
     <slot></slot>
@@ -39,6 +40,13 @@ export default {
       type: String,
       default: "normal",
     },
+    /**
+     * Disable button
+     */
+    disabled: {
+      type: Boolean,
+      default: false
+    }
   },
 };
 </script>
@@ -53,7 +61,11 @@ export default {
   color: #fff;
   border: none;
   border-radius: 4px;
-  cursor: pointer;
+
+  &:disabled {
+    color: #8f8f8f;
+    background: #dbdbdb;
+  }
 
   &--primary {
     background: #2997ff;
