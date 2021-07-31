@@ -86,14 +86,14 @@ export default {
   }
 
   &--small {
-    width: 40px;
-    height: 40px;
+    width: 32px;
+    height: 32px;
 
     .rahmet-spinner div {
-      top: 20px;
-      left: 20px;
-      width: 22px;
-      height: 22px;
+      top: 16px;
+      left: 16px;
+      width: 18px;
+      height: 18px;
       border-width: 3px;
     }
   }

@@ -3,20 +3,36 @@
     class="rahmet-btn"
     :class="[
       `rahmet-btn--${theme}`,
-      { 'rahmet-btn--block': block },
       size !== 'normal' ? `rahmet-btn--${size}` : '',
+      { 'rahmet-btn--block': block, 'rahmet-btn--loading': loading },
     ]"
-    :disabled="disabled"
+    :disabled="disabled || loading"
     @click="$emit('click')"
   >
-    <!-- @slot Use this slot for default content -->
-    <slot></slot>
+    <span class="rahmet-btn__content" :style="loading ? { opacity: 0 } : {}">
+      <!-- @slot Use this slot for default content -->
+      <slot></slot>
+    </span>
+
+    <Transition name="fade">
+      <span v-if="loading" class="rahmet-btn__loader">
+        <RahmetSpinner v-if="!hasLoadingSlot" size="small" color="#8f8f8f" />
+
+        <!-- @slot Use this slot for loading content -->
+        <slot v-else name="loading"></slot>
+      </span>
+    </Transition>
   </button>
 </template>
 
 <script>
+import RahmetSpinner from "./RahmetSpinner.vue";
+
 export default {
   name: "RahmetButton",
+  components: {
+    RahmetSpinner,
+  },
   props: {
     /**
      * The theme of the button
@@ -48,6 +64,13 @@ export default {
       type: Boolean,
       default: false,
     },
+    /**
+     * Show loader
+     */
+    loading: {
+      type: Boolean,
+      default: false,
+    },
   },
   emits: [
     /**
@@ -55,11 +78,17 @@ export default {
      */
     "click",
   ],
+  computed: {
+    hasLoadingSlot() {
+      return !!this.$slots.loading;
+    },
+  },
 };
 </script>
 
 <style lang="scss">
 .rahmet-btn {
+  position: relative;
   min-height: 44px;
   padding: 12px 16px;
   font-size: 16px;
@@ -68,6 +97,7 @@ export default {
   color: #fff;
   border: none;
   border-radius: 4px;
+  transition: 0.2s;
 
   &:disabled {
     color: #8f8f8f;
@@ -92,7 +122,7 @@ export default {
   }
 
   &--small {
-    min-height: 32px;
+    min-height: 34px;
     padding: 6px 12px;
     font-size: 14px;
     line-height: 18px;
@@ -103,6 +133,29 @@ export default {
     padding: 16px 20px;
     font-size: 18px;
     line-height: 24px;
+  }
+
+  &__content {
+    transition: opacity 0.2s;
+  }
+
+  &__loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.fade {
+  &-enter-active,
+  &-leave-active {
+    transition: opacity 0.2s;
+  }
+
+  &-enter,
+  &-leave-to {
+    opacity: 0;
   }
 }
 </style>
