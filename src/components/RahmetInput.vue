@@ -7,6 +7,9 @@
       :placeholder="placeholder"
       :disabled="disabled"
     />
+
+    <!-- @slot Use this slot for icon content -->
+    <slot name="icon"></slot>
   </div>
 </template>
 
@@ -58,13 +61,11 @@ export default {
 <style lang="scss">
 .rahmet-input {
   width: 100%;
-  height: 40px;
   padding: 0 12px;
   font-size: 16px;
   line-height: 20px;
   color: #131113;
-  border: 1px solid #dbdbdb;
-  border-radius: 4px;
+  border: none;
 
   &::placeholder {
     color: #dbdbdb;
@@ -76,6 +77,13 @@ export default {
 
   &:disabled {
     background: #f7f7f7;
+  }
+
+  &-container {
+    display: flex;
+    height: 40px;
+    border: 1px solid #dbdbdb;
+    border-radius: 4px;
   }
 }
 </style>
