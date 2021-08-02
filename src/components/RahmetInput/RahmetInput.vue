@@ -15,35 +15,35 @@
 
 <script>
 export default {
-  name: "RahmetInput",
+  name: 'RahmetInput',
   props: {
     /**
      * @model
      */
     modelValue: {
       type: String,
-      required: true,
+      required: true
     },
     /**
      * The placeholder of the input
      */
     placeholder: {
       type: String,
-      default: "Введите значение",
+      default: 'Введите значение'
     },
     /**
      * Disable the input
      */
     disabled: {
       type: Boolean,
-      default: false,
-    },
+      default: false
+    }
   },
   emits: [
     /**
      * Triggers when the model changes
      */
-    "update:modelValue",
+    'update:modelValue'
   ],
   computed: {
     value: {
@@ -51,10 +51,10 @@ export default {
         return this.modelValue;
       },
       set(value) {
-        this.$emit("update:modelValue", value);
-      },
-    },
-  },
+        this.$emit('update:modelValue', value);
+      }
+    }
+  }
 };
 </script>
 

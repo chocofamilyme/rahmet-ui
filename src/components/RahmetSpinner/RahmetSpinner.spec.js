@@ -1,18 +1,18 @@
-import { shallowMount } from "@vue/test-utils";
-import RahmetSpinner from "./RahmetSpinner.vue";
+import { shallowMount } from '@vue/test-utils';
+import RahmetSpinner from './RahmetSpinner.vue';
 
-describe("RahmetSpinner.vue", () => {
+describe('RahmetSpinner.vue', () => {
   let wrapper = null;
 
   const createWrapper = (props) => {
     const defaultProps = {
-      color: "orange",
-      size: "large",
-      ...props,
+      color: 'orange',
+      size: 'large',
+      ...props
     };
 
     wrapper = shallowMount(RahmetSpinner, {
-      propsData: defaultProps,
+      propsData: defaultProps
     });
   };
 
@@ -21,15 +21,15 @@ describe("RahmetSpinner.vue", () => {
     wrapper = null;
   });
 
-  it("displays color based on prop", () => {
+  it('displays color based on prop', () => {
     createWrapper();
 
-    const spinnerLine = wrapper.find(".rahmet-spinner div");
-    expect(spinnerLine.element.style.borderColor).toBe("orange");
+    const spinnerLine = wrapper.find('.rahmet-spinner div');
+    expect(spinnerLine.element.style.borderColor).toBe('orange');
   });
 
-  it("checks the size class", () => {
+  it('checks the size class', () => {
     createWrapper();
-    expect(wrapper.classes()).toContain("rahmet-spinner-container--large");
+    expect(wrapper.classes()).toContain('rahmet-spinner-container--large');
   });
 });

@@ -11,7 +11,7 @@
 
 <script>
 export default {
-  name: "RahmetSpinner",
+  name: 'RahmetSpinner',
   props: {
     /**
      * The size of the spinner
@@ -19,19 +19,19 @@ export default {
      */
     size: {
       type: String,
-      default: "normal",
+      default: 'normal',
       validator(value) {
-        return ["small", "normal", "large"].includes(value);
-      },
+        return ['small', 'normal', 'large'].includes(value);
+      }
     },
     /**
      * The color of the spinner
      */
     color: {
       type: String,
-      default: "#2997ff",
-    },
-  },
+      default: '#2997ff'
+    }
+  }
 };
 </script>
 

@@ -4,7 +4,7 @@
     :class="[
       `rahmet-btn--${theme}`,
       size !== 'normal' ? `rahmet-btn--${size}` : '',
-      { 'rahmet-btn--block': block, 'rahmet-btn--loading': loading },
+      { 'rahmet-btn--block': block, 'rahmet-btn--loading': loading }
     ]"
     :disabled="disabled || loading"
     @click="$emit('click')"
@@ -26,12 +26,12 @@
 </template>
 
 <script>
-import RahmetSpinner from "@/components/RahmetSpinner/RahmetSpinner.vue";
+import RahmetSpinner from '@/components/RahmetSpinner/RahmetSpinner.vue';
 
 export default {
-  name: "RahmetButton",
+  name: 'RahmetButton',
   components: {
-    RahmetSpinner,
+    RahmetSpinner
   },
   props: {
     /**
@@ -40,17 +40,17 @@ export default {
      */
     theme: {
       type: String,
-      default: "primary",
+      default: 'primary',
       validator(value) {
-        return ["primary", "warning", "error"].includes(value);
-      },
+        return ['primary', 'warning', 'error'].includes(value);
+      }
     },
     /**
      * Extend the full available width
      */
     block: {
       type: Boolean,
-      default: false,
+      default: false
     },
     /**
      * The size of the button
@@ -58,37 +58,37 @@ export default {
      */
     size: {
       type: String,
-      default: "normal",
+      default: 'normal',
       validator(value) {
-        return ["small", "normal", "large"].includes(value);
-      },
+        return ['small', 'normal', 'large'].includes(value);
+      }
     },
     /**
      * Disable the button
      */
     disabled: {
       type: Boolean,
-      default: false,
+      default: false
     },
     /**
      * Show loader
      */
     loading: {
       type: Boolean,
-      default: false,
-    },
+      default: false
+    }
   },
   emits: [
     /**
      * Triggers when the button is clicked
      */
-    "click",
+    'click'
   ],
   computed: {
     hasLoadingSlot() {
       return !!this.$slots.loading;
-    },
-  },
+    }
+  }
 };
 </script>
 
