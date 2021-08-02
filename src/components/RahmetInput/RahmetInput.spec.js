@@ -1,5 +1,5 @@
 import { mount } from "@vue/test-utils";
-import RahmetInput from "@/components/RahmetInput.vue";
+import RahmetInput from "./RahmetInput.vue";
 
 describe("RahmetInput.vue", () => {
   it("updates the v-model", () => {
@@ -12,8 +12,7 @@ describe("RahmetInput.vue", () => {
     });
 
     const rahmetInput = parent.find("input");
-    rahmetInput.element.value += ", world!";
-    rahmetInput.trigger("input");
+    rahmetInput.setValue("Hello, world!");
 
     expect(parent.vm.text).toBe("Hello, world!");
   });

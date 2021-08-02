@@ -20,6 +20,9 @@ export default {
     size: {
       type: String,
       default: "normal",
+      validator(value) {
+        return ["small", "normal", "large"].includes(value);
+      },
     },
     /**
      * The color of the spinner

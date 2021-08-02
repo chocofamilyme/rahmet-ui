@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import RahmetSpinner from "./RahmetSpinner.vue";
+import RahmetSpinner from "@/components/RahmetSpinner/RahmetSpinner.vue";
 
 export default {
   name: "RahmetButton",
@@ -41,6 +41,9 @@ export default {
     theme: {
       type: String,
       default: "primary",
+      validator(value) {
+        return ["primary", "warning", "error"].includes(value);
+      },
     },
     /**
      * Extend the full available width
@@ -56,6 +59,9 @@ export default {
     size: {
       type: String,
       default: "normal",
+      validator(value) {
+        return ["small", "normal", "large"].includes(value);
+      },
     },
     /**
      * Disable the button
