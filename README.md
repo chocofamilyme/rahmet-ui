@@ -11,7 +11,7 @@
 - [Использование](#usage)
 - [Запуск](#start)
 
-## Установка
+## <a id="install"></a>Установка
 
 ### npm
 ```
@@ -23,7 +23,8 @@ npm install rahmet-ui
 yarn add rahmet-ui
 ```
 
-## Использование
+## <a id="usage"></a>Использование
+
 Пример использования компонента ```RahmetButton```:
 ```
 <template>
@@ -40,8 +41,30 @@ export default {
 }
 ```
 
-## Запуск локально
+## <a id="start"></a>Запуск
 
-```yarn serve```
+### Локально
+```
+yarn serve
+```
 
-Тестировка компонентов осуществляется в папке ```dev/serve.vue```. Файл ```serve.js``` аналог ```main.js``` в обычном Vue проекте.
+Инициализация компонентов осуществляется в папке ```dev/serve.vue```. Файл ```serve.js``` аналог ```main.js``` в обычном Vue проекте.
+
+### Production
+```
+yarn build
+```
+
+### Unit тесты
+```
+yarn test:unit
+```
+
+### E2E тесты
+```
+yarn test:e2e
+```
+
+### ESLINT
+```
+yarn lint```
