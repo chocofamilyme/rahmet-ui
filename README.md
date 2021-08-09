@@ -1,34 +1,47 @@
-# rahmet-ui
 
-## Project setup
-```
-yarn install
-```
+<p align="center" style="padding: 20px 0px">
+  <img src="https://rahmet.s3.ap-southeast-1.amazonaws.com/rahmet_logo.svg" alt="Рахмет лого" height="90">
+</p>
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
+<h1 align="center" style="font-weight: bol">Рахмет UI Компоненты</h1>
 
-### Compiles and minifies for production
-```
-yarn build
-```
+## Контент
 
-### Run your unit tests
+- [Установка](#install)
+- [Использование](#usage)
+- [Запуск](#start)
+
+## Установка
+
+### npm
 ```
-yarn test:unit
+npm install rahmet-ui
 ```
 
-### Run your end-to-end tests
+### yarn
 ```
-yarn test:e2e
-```
-
-### Lints and fixes files
-```
-yarn lint
+yarn add rahmet-ui
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Использование
+Пример использования компонента ```RahmetButton```:
+```
+<template>
+    <rahmet-button>Test Rahmet Button</rahmet-button>
+</template>
+
+import {RahmetButton} from "rahmet-ui"
+
+export default {
+    ...
+    components: {
+        RahmetButton
+    }
+}
+```
+
+## Запуск локально
+
+```yarn serve```
+
+Тестировка компонентов осуществляется в папке ```dev/serve.vue```. Файл ```serve.js``` аналог ```main.js``` в обычном Vue проекте.
