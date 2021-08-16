@@ -1,34 +1,70 @@
-# rahmet-ui
 
-## Project setup
+<p align="center" style="padding: 20px 0px">
+  <img src="https://rahmet.s3.ap-southeast-1.amazonaws.com/rahmet_logo.svg" alt="Рахмет лого" height="90">
+</p>
+
+<h1 align="center" style="font-weight: bol">Рахмет UI Компоненты</h1>
+
+## Контент
+
+- [Установка](#install)
+- [Использование](#usage)
+- [Запуск](#start)
+
+## <a id="install"></a>Установка
+
+### npm
 ```
-yarn install
+npm install rahmet-ui
 ```
 
-### Compiles and hot-reloads for development
+### yarn
+```
+yarn add rahmet-ui
+```
+
+## <a id="usage"></a>Использование
+
+Пример использования компонента ```RahmetButton```:
+```
+<template>
+    <rahmet-button>Test Rahmet Button</rahmet-button>
+</template>
+
+import {RahmetButton} from "rahmet-ui"
+
+export default {
+    ...
+    components: {
+        RahmetButton
+    }
+}
+```
+
+## <a id="start"></a>Запуск
+
+### Локально
 ```
 yarn serve
 ```
 
-### Compiles and minifies for production
+Инициализация компонентов осуществляется в папке ```dev/serve.vue```. Файл ```serve.js``` аналог ```main.js``` в обычном Vue проекте.
+
+### Production
 ```
 yarn build
 ```
 
-### Run your unit tests
+### Unit тесты
 ```
 yarn test:unit
 ```
 
-### Run your end-to-end tests
+### E2E тесты
 ```
 yarn test:e2e
 ```
 
-### Lints and fixes files
+### ESLINT
 ```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+yarn lint```
