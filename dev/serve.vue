@@ -1,14 +1,20 @@
 <script>
 import { defineComponent } from 'vue';
 // Uncomment import and local "components" registration if library is not registered globally.
-import { RahmetButton, RahmetInput, RahmetSpinner } from '@/entry.esm';
+import {
+  RahmetButton,
+  RahmetInput,
+  RahmetSpinner,
+  RahmetToast
+} from '@/entry.esm';
 
 export default defineComponent({
   name: 'ServeDev',
   components: {
     RahmetButton,
     RahmetInput,
-    RahmetSpinner
+    RahmetSpinner,
+    RahmetToast
   }
 });
 </script>
@@ -21,5 +27,7 @@ export default defineComponent({
     <rahmet-input />
     <h1>Spinner:</h1>
     <rahmet-spinner />
+    <h1>Toast:</h1>
+    <rahmet-toast />
   </div>
 </template>
