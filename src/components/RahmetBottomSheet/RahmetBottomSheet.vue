@@ -45,26 +45,45 @@ const extractTouch = (e) => e.changedTouches[0].clientY;
 export default {
   name: 'UiBottomSheet',
   props: {
+    /**
+     * The name of the button sheet
+     * Note: must be the same parameter in onOpen()
+     */
     name: {
       type: String,
       required: true
     },
+    /**
+     * Rounded top corners
+     */
     rounded: {
       type: Boolean,
       default: true
     },
+    /**
+     * Background overlay
+     */
     overlay: {
       type: Boolean,
       default: true
     },
+    /**
+     * Inside content padding
+     */
     contentPadding: {
       type: Boolean,
       default: true
     },
+    /**
+     * Minimum height to close the bottom sheet by dragging
+     */
     shiftMinHeight: {
       type: Number,
       default: 70
     },
+    /**
+     * Color of the sheet shift
+     */
     shiftColor: {
       type: String,
       default: '#e0e0e0'
