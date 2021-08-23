@@ -43,7 +43,7 @@
 const extractTouch = (e) => e.changedTouches[0].clientY;
 
 export default {
-  name: 'UiBottomSheet',
+  name: 'RahmetBottomSheet',
   props: {
     /**
      * The name of the button sheet

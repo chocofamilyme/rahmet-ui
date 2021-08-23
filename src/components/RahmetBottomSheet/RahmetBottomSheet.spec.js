@@ -31,7 +31,7 @@ describe('RahmetBottomSheet.vue', () => {
   });
 
   it('closes the bottom sheet after clicking on background overlay', async () => {
-    await createWrapper();
+    createWrapper();
 
     await wrapper.setData({
       setInnerWidth: 600
@@ -41,8 +41,16 @@ describe('RahmetBottomSheet.vue', () => {
     expect(wrapper.vm.bottomSheet.activeName).toEqual('');
   });
 
+  it('closes the bottom sheet on mobile touch end', async () => {
+    createWrapper();
+
+    wrapper.vm.onBlackoutTouchStart();
+    wrapper.vm.onBlackoutTouchEnd();
+    expect(wrapper.vm.bottomSheet.activeName).toEqual('');
+  });
+
   it('closes the bottom sheet after dragging the sheet shift', async () => {
-    await createWrapper({ shiftMinHeight: 10 });
+    createWrapper({ shiftMinHeight: 10 });
     await wrapper.setData({
       sheetTouchStarted: true,
       sheetShift: 500
@@ -56,26 +64,50 @@ describe('RahmetBottomSheet.vue', () => {
 
     expect(wrapper.classes()).toContain('bottom-sheet-modal');
     expect(wrapper.find('.blackout').exists()).toBeTruthy();
+    expect(wrapper.find('.sheet-shift').exists()).toBeTruthy();
   });
 
-  it('hides overflow and scroll behavior when the bottom sheet is open', async () => {
+  it('hides overflow and scroll behavior when the bottom sheet is open', () => {
     const _props = { name: 'demo' };
-    await createWrapper(_props);
+    createWrapper(_props);
 
     expect(wrapper.vm.bottomSheet.activeName).toEqual(_props.name);
     expect(document.body.style.overflow).toEqual('hidden');
     expect(document.body.style.overscrollBehavior).toEqual('contain');
   });
 
-  it('destroys the bottom sheet and return overflow, and scroll behavior', async () => {
+  it('destroys the bottom sheet and return overflow, and scroll behavior', () => {
     createWrapper();
 
     wrapper.vm.onHide();
-    await wrapper.vm.$nextTick();
 
     expect(wrapper.find('.bottom-sheet-modal').exists()).toBeFalsy();
     expect(wrapper.vm.bottomSheet.activeName).toEqual('');
     expect(document.body.style.overflow).toEqual('');
     expect(document.body.style.overscrollBehavior).toEqual('auto');
+  });
+
+  it('does not round top corners', async () => {
+    createWrapper({
+      rounded: false
+    });
+    expect(wrapper.find('.bottom-sheet-rounded').exists()).toBeFalsy();
+  });
+
+  it('checks whether sheet touch move', async () => {
+    const _event = {
+      changedTouches: [
+        {
+          clientY: 500
+        }
+      ]
+    };
+    createWrapper();
+
+    wrapper.setData({
+      sheetTouchStarted: true
+    });
+    wrapper.vm.onSheetTouchMove(_event);
+    expect(wrapper.vm.sheetShift).toBeGreaterThan(0);
   });
 });
