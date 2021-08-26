@@ -4,7 +4,7 @@
       <div
         class="blackout"
         :class="{ 'bottom-sheet-overlay': overlay }"
-        @touchstart.passive="onBlackoutTouchStart"
+        @touchstart.prevent="onBlackoutTouchStart"
         @touchend="onBlackoutTouchEnd"
         v-on="innerWidth >= 550 ? { click: onHide } : {}"
       ></div>
@@ -17,8 +17,8 @@
           :class="{ 'bottom-sheet-rounded': rounded }"
           role="dialog"
           aria-modal="true"
-          @touchstart.passive="onSheetTouchStart"
-          @touchmove.passive="onSheetTouchMove"
+          @touchstart.prevent="onSheetTouchStart"
+          @touchmove.prevent="onSheetTouchMove"
           @touchend="onSheetTouchEnd"
         >
           <div class="shift-content" @click="onHide">
@@ -108,6 +108,9 @@ export default {
       }
     }
   },
+  mounted() {
+    window.addEventListener('resize', this.setInnerWidth);
+  },
   beforeUnmount() {
     if (this.bottomSheet.activeName === this.name) {
       this.onHide();
@@ -115,9 +118,6 @@ export default {
   },
   unmounted() {
     window.removeEventListener('resize', this.setInnerWidth);
-  },
-  mounted() {
-    window.addEventListener('resize', this.setInnerWidth);
   },
   methods: {
     setInnerWidth() {
@@ -169,10 +169,10 @@ export default {
 <style lang="scss" scoped>
 @mixin inset-0 {
   position: fixed;
-  top: 0px;
-  right: 0px;
-  bottom: 0px;
   left: 0px;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
 }
 
 .z-9999 {
@@ -186,15 +186,15 @@ export default {
 
 .sheet {
   @extend .z-9999;
+  display: flex;
   position: absolute;
   bottom: 0px;
-  display: flex;
   width: 100%;
 
   &-shift {
-    width: 100%;
     display: flex;
     flex-direction: column;
+    width: 100%;
     --tw-bg-opacity: 1;
     background-color: rgba(255, 255, 255, var(--tw-bg-opacity));
     overflow: hidden;
@@ -206,11 +206,11 @@ export default {
 }
 
 .shift-content {
-  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  width: 100%;
 
   div {
     margin-top: 14px;
@@ -250,7 +250,7 @@ export default {
   }
 
   &-overlay {
-    background-color: #000000;
+    background: #000000;
     opacity: 0.7;
   }
 
