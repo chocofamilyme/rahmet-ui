@@ -1,6 +1,6 @@
 {
   "name": "rahmet-ui",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "private": false,
   "main": "dist/rahmet-ui.ssr.js",
   "browser": "dist/rahmet-ui.esm.js",
@@ -60,6 +60,7 @@
     "rollup-plugin-vue": "^6.0.0",
     "sass": "^1.32.11",
     "sass-loader": "^8.0.2",
+    "scroll-lock": "^2.1.5",
     "style-loader": "^2.0.0",
     "typescript": "~3.9.3",
     "vue": "^3.0.0",
@@ -71,8 +72,5 @@
   "keywords": [
     "rahmet-ui",
     "rahmet"
-  ],
-  "dependencies": {
-    "scroll-lock": "^2.1.5"
-  }
+  ]
 }
