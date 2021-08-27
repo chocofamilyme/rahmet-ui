@@ -1,6 +1,6 @@
 {
   "name": "rahmet-ui",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "private": false,
   "main": "dist/rahmet-ui.ssr.js",
   "browser": "dist/rahmet-ui.esm.js",
@@ -71,5 +71,8 @@
   "keywords": [
     "rahmet-ui",
     "rahmet"
-  ]
+  ],
+  "dependencies": {
+    "scroll-lock": "^2.1.5"
+  }
 }
