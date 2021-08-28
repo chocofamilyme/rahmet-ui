@@ -43,7 +43,7 @@ export default {
       type: String,
       default: 'primary',
       validator(value) {
-        return ['primary', 'warning', 'error'].includes(value);
+        return ['primary', 'secondary', 'warning', 'error'].includes(value);
       }
     },
     /**
@@ -119,6 +119,11 @@ export default {
 
   &--primary {
     background: #2997ff;
+  }
+
+  &--secondary {
+    background: #f2f2f2;
+    color: #2997ff;
   }
 
   &--warning {
