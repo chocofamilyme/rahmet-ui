@@ -58,4 +58,12 @@ describe('RahmetButton.vue', () => {
     expect(loader.html()).toContain('...');
     expect(loaderSpinner.exists()).toBe(false);
   });
+
+  it('sets border radius', () => {
+    const borderPropValue = 10;
+    createWrapper({ borderRadius: borderPropValue });
+
+    const btnRoot = wrapper.find('.rahmet-btn');
+    expect(btnRoot.element.style['border-radius']).toBe(borderPropValue + 'px');
+  });
 });

@@ -7,6 +7,7 @@
       { 'rahmet-btn--block': block, 'rahmet-btn--loading': loading }
     ]"
     :disabled="disabled || loading"
+    :style="{ 'border-radius': borderRadius + 'px' }"
     @click="$emit('click')"
   >
     <span class="rahmet-btn__content" :style="loading ? { opacity: 0 } : {}">
@@ -76,6 +77,13 @@ export default {
     loading: {
       type: Boolean,
       default: false
+    },
+    /**
+     * Set border radius
+     */
+    borderRadius: {
+      type: Number,
+      default: 4
     }
   },
   emits: [
@@ -102,7 +110,6 @@ export default {
   font-weight: 500;
   color: #fff;
   border: none;
-  border-radius: 4px;
   transition: 0.2s;
 
   &:disabled {

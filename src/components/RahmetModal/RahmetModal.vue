@@ -25,6 +25,7 @@
 import { disablePageScroll, enablePageScroll } from 'scroll-lock';
 
 export default {
+  name: 'RahmetModal',
   props: {
     /**
      * Rounded corners
