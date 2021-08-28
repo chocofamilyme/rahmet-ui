@@ -7,7 +7,7 @@
       { 'rahmet-btn--block': block, 'rahmet-btn--loading': loading }
     ]"
     :disabled="disabled || loading"
-    :style="{ 'border-radius': borderRadius + 'px' }"
+    :style="{ 'border-radius': borderRadius + 'px', 'font-weight': fontWeight }"
     @click="$emit('click')"
   >
     <span class="rahmet-btn__content" :style="loading ? { opacity: 0 } : {}">
@@ -84,6 +84,13 @@ export default {
     borderRadius: {
       type: Number,
       default: 4
+    },
+    /**
+     * Set font weight
+     */
+    fontWeight: {
+      type: String,
+      default: '500'
     }
   },
   emits: [
@@ -107,7 +114,6 @@ export default {
   padding: 12px 16px;
   font-size: 16px;
   line-height: 20px;
-  font-weight: 500;
   color: #fff;
   border: none;
   transition: 0.2s;

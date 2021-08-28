@@ -66,4 +66,12 @@ describe('RahmetButton.vue', () => {
     const btnRoot = wrapper.find('.rahmet-btn');
     expect(btnRoot.element.style['border-radius']).toBe(borderPropValue + 'px');
   });
+
+  it('sets font weight', () => {
+    const fontWeight = '600';
+    createWrapper({ fontWeight });
+
+    const btnRoot = wrapper.find('.rahmet-btn');
+    expect(btnRoot.element.style['font-weight']).toBe(fontWeight);
+  });
 });
