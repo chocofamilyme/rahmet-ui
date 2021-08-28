@@ -32,4 +32,9 @@ describe('RahmetSpinner.vue', () => {
     createWrapper();
     expect(wrapper.classes()).toContain('rahmet-spinner-container--large');
   });
+
+  it('sets absolute position vertically and horizontally centered', () => {
+    createWrapper({ absolute: true });
+    expect(wrapper.classes()).toContain('rahmet-spinner-container--absolute');
+  });
 });
