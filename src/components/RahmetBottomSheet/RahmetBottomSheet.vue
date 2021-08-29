@@ -4,7 +4,7 @@
       <div
         class="blackout"
         :class="{ 'bottom-sheet-overlay': overlay }"
-        @touchstart.prevent="onBlackoutTouchStart"
+        @touchstart.passive="onBlackoutTouchStart"
         @touchend="onBlackoutTouchEnd"
         v-on="innerWidth >= 550 ? { click: onHide } : {}"
       ></div>
@@ -17,8 +17,8 @@
           :class="{ 'bottom-sheet-rounded': rounded }"
           role="dialog"
           aria-modal="true"
-          @touchstart.prevent="onSheetTouchStart"
-          @touchmove.prevent="onSheetTouchMove"
+          @touchstart.passive="onSheetTouchStart"
+          @touchmove.passive="onSheetTouchMove"
           @touchend="onSheetTouchEnd"
         >
           <div class="shift-content" @click="onHide">
@@ -41,6 +41,7 @@
 
 <script>
 const extractTouch = (e) => e.changedTouches[0].clientY;
+import { disablePageScroll, enablePageScroll } from 'scroll-lock';
 
 export default {
   name: 'RahmetBottomSheet',
@@ -125,12 +126,12 @@ export default {
     },
     onOpen(name) {
       this.bottomSheet.activeName = name;
-      document.body.style.overflow = 'hidden';
       document.body.style.overscrollBehavior = 'contain';
+      disablePageScroll();
     },
     onHide() {
       this.bottomSheet.activeName = '';
-      document.body.style.overflow = '';
+      enablePageScroll();
       document.body.style.overscrollBehavior = 'auto';
     },
     onBlackoutTouchStart() {
