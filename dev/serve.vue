@@ -1,12 +1,12 @@
 <script>
 import { defineComponent } from 'vue';
+
 // Uncomment import and local "components" registration if library is not registered globally.
 import {
   RahmetButton,
   RahmetInput,
   RahmetSpinner,
-  RahmetBottomSheet,
-  RahmetToast
+  RahmetBottomSheet
 } from '@/entry.esm';
 
 export default defineComponent({
@@ -15,8 +15,10 @@ export default defineComponent({
     RahmetButton,
     RahmetInput,
     RahmetSpinner,
-    RahmetBottomSheet,
-    RahmetToast
+    RahmetBottomSheet
+  },
+  mounted() {
+    this.$toast.open({ title: 'Toast', text: 'Notification' });
   },
   methods: {
     openBottomSheet() {
@@ -41,6 +43,5 @@ export default defineComponent({
         <rahmet-spinner />
       </div>
     </rahmet-bottom-sheet>
-    <rahmet-toast />
   </div>
 </template>

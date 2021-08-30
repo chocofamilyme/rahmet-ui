@@ -21,14 +21,14 @@ describe('RahmetToast.vue', () => {
     wrapper = null;
   });
 
-  it('contains the theme class', () => {
+  it('contains the theme class', async () => {
     createWrapper();
 
     const toast = wrapper.find('.rahmet-toast');
     expect(toast.classes()).toContain('rahmet-toast--success');
   });
 
-  it('contains title', () => {
+  it('contains title', async () => {
     createWrapper();
 
     const title = wrapper.find('.rahmet-toast__title');

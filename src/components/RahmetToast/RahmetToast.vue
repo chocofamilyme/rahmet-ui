@@ -1,5 +1,5 @@
 <template>
-  <Transition name="slide-down">
+  <Transition :name="transition">
     <div
       v-show="isActive"
       ref="root"
@@ -25,7 +25,8 @@
 </template>
 
 <script>
-import { removeElement } from './helpers.js';
+import { ref, render } from 'vue';
+import { removeElement } from './RahmetToast.helpers';
 
 export default {
   name: 'RahmetToast',
@@ -61,7 +62,21 @@ export default {
     duration: {
       type: Number,
       default: 3000
+    },
+    /**
+     * The transition name of the toast
+     */
+    transition: {
+      type: String,
+      default: 'slide-down'
     }
+  },
+  setup() {
+    const root = ref(null);
+
+    return {
+      root
+    };
   },
   data() {
     return {
@@ -77,20 +92,26 @@ export default {
     this.showNotice();
   },
   methods: {
+    /**
+     * Gets called before mounting
+     */
     setupContainer() {
-      this.parent = document.querySelector('.v-toast');
+      this.parent = document.querySelector('.rahmet-toast-container');
 
       // no need to create the parent, it already exists
       if (this.parent) return;
 
       if (!this.parent) {
         this.parent = document.createElement('div');
-        this.parent.className = 'v-toast';
+        this.parent.className = 'rahmet-toast-container';
       }
 
       const container = document.body;
       container.appendChild(this.parent);
     },
+    /**
+     * Gets called after the timer expires
+     */
     dismiss() {
       if (this.timer) {
         clearTimeout(this.timer);
@@ -99,16 +120,19 @@ export default {
 
       this.isActive = false;
 
-      // timeout for the animation complete before unmounting
+      // Timeout for the animation complete before unmounting
       setTimeout(() => {
-        const wrapper = this.$refs.root;
+        const wrapper = this.root;
         render(null, wrapper);
         removeElement(wrapper);
       }, 150);
     },
+    /**
+     * Gets called on mounting
+     */
     showNotice() {
-      const wrapper = this.$refs.root.parentElement;
-      this.parent.insertAdjacentElement('afterbegin', this.$refs.root);
+      const wrapper = this.root.parentElement;
+      this.parent.insertAdjacentElement('afterbegin', this.root);
       removeElement(wrapper);
 
       this.isActive = true;
@@ -125,6 +149,7 @@ export default {
 .rahmet-toast {
   display: flex;
   align-items: center;
+  margin-bottom: 12px;
   padding: 12px;
   border-radius: 8px;
 
@@ -138,6 +163,18 @@ export default {
 
   &--error {
     background: #cc4747;
+  }
+
+  &-container {
+    position: fixed;
+    z-index: 999;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 16px;
+    overflow: hidden;
+    pointer-events: none;
   }
 
   &__icon {
