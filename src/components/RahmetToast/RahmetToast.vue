@@ -1,6 +1,11 @@
 <template>
   <Transition name="slide-down">
-    <div class="rahmet-toast" :class="[`rahmet-toast--${theme}`]">
+    <div
+      v-show="isActive"
+      ref="root"
+      class="rahmet-toast"
+      :class="[`rahmet-toast--${theme}`]"
+    >
       <div class="rahmet-toast__icon-wrapper">
         <span
           class="rahmet-toast__icon"
@@ -20,6 +25,8 @@
 </template>
 
 <script>
+import { removeElement } from './helpers.js';
+
 export default {
   name: 'RahmetToast',
   props: {
@@ -47,6 +54,68 @@ export default {
     text: {
       type: String,
       default: ''
+    },
+    /**
+     * The duration of the toast
+     */
+    duration: {
+      type: Number,
+      default: 3000
+    }
+  },
+  data() {
+    return {
+      isActive: false,
+      parent: null,
+      timer: null
+    };
+  },
+  beforeMount() {
+    this.setupContainer();
+  },
+  mounted() {
+    this.showNotice();
+  },
+  methods: {
+    setupContainer() {
+      this.parent = document.querySelector('.v-toast');
+
+      // no need to create the parent, it already exists
+      if (this.parent) return;
+
+      if (!this.parent) {
+        this.parent = document.createElement('div');
+        this.parent.className = 'v-toast';
+      }
+
+      const container = document.body;
+      container.appendChild(this.parent);
+    },
+    dismiss() {
+      if (this.timer) {
+        clearTimeout(this.timer);
+        this.timer = null;
+      }
+
+      this.isActive = false;
+
+      // timeout for the animation complete before unmounting
+      setTimeout(() => {
+        const wrapper = this.$refs.root;
+        render(null, wrapper);
+        removeElement(wrapper);
+      }, 150);
+    },
+    showNotice() {
+      const wrapper = this.$refs.root.parentElement;
+      this.parent.insertAdjacentElement('afterbegin', this.$refs.root);
+      removeElement(wrapper);
+
+      this.isActive = true;
+
+      if (this.duration) {
+        this.timer = setTimeout(this.dismiss, this.duration);
+      }
     }
   }
 };
@@ -114,7 +183,7 @@ export default {
 .slide-down {
   &-enter-active,
   &-leave-active {
-    transition: all 0.2s ease-out;
+    transition: all 0.15s ease-out;
   }
 
   &-enter-from,
