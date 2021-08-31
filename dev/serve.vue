@@ -5,7 +5,8 @@ import {
   RahmetButton,
   RahmetInput,
   RahmetSpinner,
-  RahmetBottomSheet
+  RahmetBottomSheet,
+  RahmetModal
 } from '@/entry.esm';
 
 export default defineComponent({
@@ -14,7 +15,8 @@ export default defineComponent({
     RahmetButton,
     RahmetInput,
     RahmetSpinner,
-    RahmetBottomSheet
+    RahmetBottomSheet,
+    RahmetModal
   },
   methods: {
     openBottomSheet() {
@@ -29,14 +31,24 @@ export default defineComponent({
     <h1>Input:</h1>
     <rahmet-input />
     <h1>Spinner:</h1>
-    <rahmet-spinner />
-    <h1>Toggle Bottom Sheet:</h1>
-    <rahmet-button @click="openBottomSheet">Test</rahmet-button>
+    <rahmet-spinner absolute />
+    <rahmet-button @click="openBottomSheet" :borderRadius="6" block>
+      Toggle Bottom Sheet
+    </rahmet-button>
+    <div style="margin-top: 20px"></div>
     <rahmet-bottom-sheet name="test" ref="sheet">
       <div>
         <h1 style="height: 50px">Bottom Sheet Text</h1>
         <rahmet-spinner />
       </div>
     </rahmet-bottom-sheet>
+    <rahmet-button block theme="secondary" @click="$refs.modal.onOpen()"
+      >Toggle Modal
+    </rahmet-button>
+    <rahmet-modal ref="modal">
+      <div style="height: 150px">
+        <h1>Testing...</h1>
+      </div>
+    </rahmet-modal>
   </div>
 </template>

@@ -75,7 +75,7 @@ yarn test:e2e
 ### ESLINT
 
 ````
-yarn lint```
+yarn lint
 ````
 
 ## <a id="requirements"></a>Требование
