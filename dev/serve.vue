@@ -45,11 +45,8 @@ export default defineComponent({
       </div>
     </rahmet-bottom-sheet>
 
-    <!-- Toast notification -->
-    <h1>Show Toast:</h1>
-    <rahmet-button @click="showToast">Test</rahmet-button>
-
     <!-- Modal -->
+    <h1>Open Modal:</h1>
     <rahmet-button block theme="secondary" @click="openModal">
       Toggle Modal
     </rahmet-button>
@@ -58,5 +55,9 @@ export default defineComponent({
         <h1>Testing...</h1>
       </div>
     </rahmet-modal>
+
+    <!-- Toast notification -->
+    <h1>Show Toast:</h1>
+    <rahmet-button @click="showToast">Test</rahmet-button>
   </div>
 </template>
