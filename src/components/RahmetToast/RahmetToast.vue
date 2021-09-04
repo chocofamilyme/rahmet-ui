@@ -1,61 +1,35 @@
 <template>
-  <Transition :name="transition">
-    <div
-      v-show="isActive"
-      ref="root"
-      class="rahmet-toast"
-      :class="[`rahmet-toast--${theme}`]"
-    >
-      <div class="rahmet-toast__icon-wrapper">
-        <span
-          class="rahmet-toast__icon"
-          :class="[`rahmet-toast__icon--${theme}`]"
-        ></span>
-      </div>
+  <div class="rahmet-toast-container">
+    <TransitionGroup :name="transition">
+      <div
+        v-for="toast in toasts"
+        :key="toast.key"
+        class="rahmet-toast"
+        :class="[`rahmet-toast--${toast.theme}`]"
+      >
+        <div class="rahmet-toast__icon-wrapper">
+          <span
+            class="rahmet-toast__icon"
+            :class="[`rahmet-toast__icon--${toast.theme}`]"
+          ></span>
+        </div>
 
-      <div>
-        <strong v-if="title" class="rahmet-toast__title">
-          {{ title }}
-        </strong>
+        <div>
+          <strong v-if="toast.title" class="rahmet-toast__title">
+            {{ toast.title }}
+          </strong>
 
-        <p v-if="text" class="rahmet-toast__text">{{ text }}</p>
+          <p v-if="toast.text" class="rahmet-toast__text">{{ toast.text }}</p>
+        </div>
       </div>
-    </div>
-  </Transition>
+    </TransitionGroup>
+  </div>
 </template>
 
 <script>
-import { ref, render } from 'vue';
-import { removeElement } from './RahmetToast.helpers';
-
 export default {
   name: 'RahmetToast',
   props: {
-    /**
-     * The theme of the toast
-     * @values success, warning, error
-     */
-    theme: {
-      type: String,
-      default: 'success',
-      validator(value) {
-        return ['success', 'warning', 'error'].includes(value);
-      }
-    },
-    /**
-     * The title of the toast
-     */
-    title: {
-      type: String,
-      default: ''
-    },
-    /**
-     * The text of the toast
-     */
-    text: {
-      type: String,
-      default: ''
-    },
     /**
      * The duration of the toast
      */
@@ -71,75 +45,57 @@ export default {
       default: 'slide-down'
     }
   },
-  setup() {
-    const root = ref(null);
-
-    return {
-      root
-    };
-  },
   data() {
     return {
-      isActive: false,
-      parent: null,
-      timer: null
+      toasts: []
     };
-  },
-  beforeMount() {
-    this.setupContainer();
-  },
-  mounted() {
-    this.showNotice();
   },
   methods: {
     /**
-     * Gets called before mounting
+     * Adds toast
      */
-    setupContainer() {
-      this.parent = document.querySelector('.rahmet-toast-container');
-
-      // no need to create the parent, it already exists
-      if (this.parent) return;
-
-      if (!this.parent) {
-        this.parent = document.createElement('div');
-        this.parent.className = 'rahmet-toast-container';
+    add(options = {}) {
+      if (!['success', 'warning', 'error'].includes(options.theme)) {
+        return;
       }
 
-      const container = document.body;
-      container.appendChild(this.parent);
+      const toast = {
+        theme: options.theme,
+        title: options.title,
+        text: options.text,
+        key: `${Date.now()}-${Math.random()}`
+      };
+
+      this.toasts.push(toast);
+      setTimeout(() => this.remove(toast), options.duration || this.duration);
     },
     /**
-     * Gets called after the timer expires
+     * Removes toast
      */
-    dismiss() {
-      if (this.timer) {
-        clearTimeout(this.timer);
-        this.timer = null;
+    remove(toast) {
+      let i = this.toasts.indexOf(toast);
+
+      if (i >= 0) {
+        this.toasts.splice(i, 1);
       }
-
-      this.isActive = false;
-
-      // Timeout for the animation complete before unmounting
-      setTimeout(() => {
-        const wrapper = this.root;
-        render(null, wrapper);
-        removeElement(wrapper);
-      }, 150);
     },
     /**
-     * Gets called on mounting
+     * Adds success toast
      */
-    showNotice() {
-      const wrapper = this.root.parentElement;
-      this.parent.insertAdjacentElement('afterbegin', this.root);
-      removeElement(wrapper);
-
-      this.isActive = true;
-
-      if (this.duration) {
-        this.timer = setTimeout(this.dismiss, this.duration);
-      }
+    success(options = {}) {
+      this.add({ ...options, theme: 'success' });
+    },
+    /**
+     * Adds warning toast
+     */
+    warning(options = {}) {
+      this.add({ ...options, theme: 'warning' });
+    },
+    /**
+     * Adds error toast
+     */
+    error(options = {}) {
+      this.add({ ...options, theme: 'error' });
     }
   }
 };
@@ -167,11 +123,11 @@ export default {
 
   &-container {
     position: fixed;
-    z-index: 999;
+    z-index: 9999;
     top: 0;
     right: 0;
-    bottom: 0;
     left: 0;
+    bottom: 0;
     padding: 16px;
     overflow: hidden;
     pointer-events: none;
@@ -220,7 +176,9 @@ export default {
 .slide-down {
   &-enter-active,
   &-leave-active {
-    transition: all 0.15s ease-out;
+    transition-property: transform, opacity;
+    transition-duration: 150ms;
+    transition-timing-function: ease-out;
   }
 
   &-enter-from,

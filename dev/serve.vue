@@ -1,28 +1,22 @@
 <script>
 import { defineComponent } from 'vue';
 
-// Uncomment import and local "components" registration if library is not registered globally.
-import {
-  RahmetButton,
-  RahmetInput,
-  RahmetSpinner,
-  RahmetBottomSheet
-} from '@/entry.esm';
-
 export default defineComponent({
   name: 'ServeDev',
-  components: {
-    RahmetButton,
-    RahmetInput,
-    RahmetSpinner,
-    RahmetBottomSheet
-  },
-  mounted() {
-    this.$toast.open({ title: 'Toast', text: 'Notification' });
+  data() {
+    return {
+      inputValue: ''
+    };
   },
   methods: {
     openBottomSheet() {
       this.$refs.sheet.onOpen('test');
+    },
+    showToast() {
+      this.$toast.warning({
+        title: 'Toast',
+        text: 'Notification'
+      });
     }
   }
 });
@@ -30,11 +24,15 @@ export default defineComponent({
 
 <template>
   <div id="app">
+    <!-- Input -->
     <h1>Input:</h1>
-    <rahmet-input />
+    <rahmet-input v-model="inputValue" />
+
+    <!-- Spinner -->
     <h1>Spinner:</h1>
     <rahmet-spinner />
-    <h1>Toast:</h1>
+
+    <!-- Bottom Sheet -->
     <h1>Toggle Bottom Sheet:</h1>
     <rahmet-button @click="openBottomSheet">Test</rahmet-button>
     <rahmet-bottom-sheet name="test" ref="sheet">
@@ -43,5 +41,9 @@ export default defineComponent({
         <rahmet-spinner />
       </div>
     </rahmet-bottom-sheet>
+
+    <!-- Toast notification -->
+    <h1>Show Toast:</h1>
+    <rahmet-button @click="showToast">Test</rahmet-button>
   </div>
 </template>
