@@ -32,11 +32,24 @@ describe('RahmetToast.vue', () => {
 
   it('toasts contain a title', async () => {
     createWrapper();
-    wrapper.vm.success({ title: 'Success!' });
+
+    const title = 'Success!';
+    wrapper.vm.success({ title });
     await nextTick();
 
     const successToast = wrapper.find('.rahmet-toast');
-    expect(successToast.html()).toContain('Success!');
+    expect(successToast.html()).toContain(title);
+  });
+
+  it('toasts contain a text', async () => {
+    createWrapper();
+
+    const text = 'Success text!';
+    wrapper.vm.success({ text });
+    await nextTick();
+
+    const successToast = wrapper.find('.rahmet-toast');
+    expect(successToast.html()).toContain(text);
   });
 
   it('toasts destroy after timeout', async () => {
@@ -47,9 +60,13 @@ describe('RahmetToast.vue', () => {
     wrapper.vm.success();
     await nextTick();
 
+    expect(wrapper.vm.toasts.length).toEqual(1);
     expect(wrapper.find('.rahmet-toast').exists()).toBe(true);
+
     jest.advanceTimersByTime(duration);
     await nextTick();
+
+    expect(wrapper.vm.toasts.length).toEqual(0);
     expect(wrapper.find('.rahmet-toast').exists()).toBe(false);
   });
 
