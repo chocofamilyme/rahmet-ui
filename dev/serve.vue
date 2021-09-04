@@ -12,6 +12,9 @@ export default defineComponent({
     openBottomSheet() {
       this.$refs.sheet.onOpen('test');
     },
+    openModal() {
+      this.$refs.modal.onOpen();
+    },
     showToast() {
       this.$toast.warning({
         title: 'Toast',
@@ -45,5 +48,15 @@ export default defineComponent({
     <!-- Toast notification -->
     <h1>Show Toast:</h1>
     <rahmet-button @click="showToast">Test</rahmet-button>
+
+    <!-- Modal -->
+    <rahmet-button block theme="secondary" @click="openModal">
+      Toggle Modal
+    </rahmet-button>
+    <rahmet-modal ref="modal">
+      <div style="height: 150px">
+        <h1>Testing...</h1>
+      </div>
+    </rahmet-modal>
   </div>
 </template>

@@ -7,6 +7,7 @@
       { 'rahmet-btn--block': block, 'rahmet-btn--loading': loading }
     ]"
     :disabled="disabled || loading"
+    :style="{ 'border-radius': borderRadius + 'px', 'font-weight': fontWeight }"
     @click="$emit('click')"
   >
     <span class="rahmet-btn__content" :style="loading ? { opacity: 0 } : {}">
@@ -42,7 +43,7 @@ export default {
       type: String,
       default: 'primary',
       validator(value) {
-        return ['primary', 'warning', 'error'].includes(value);
+        return ['primary', 'secondary', 'warning', 'error'].includes(value);
       }
     },
     /**
@@ -76,6 +77,20 @@ export default {
     loading: {
       type: Boolean,
       default: false
+    },
+    /**
+     * Set border radius
+     */
+    borderRadius: {
+      type: Number,
+      default: 4
+    },
+    /**
+     * Set font weight
+     */
+    fontWeight: {
+      type: String,
+      default: '500'
     }
   },
   emits: [
@@ -99,10 +114,8 @@ export default {
   padding: 12px 16px;
   font-size: 16px;
   line-height: 20px;
-  font-weight: 500;
   color: #fff;
   border: none;
-  border-radius: 4px;
   transition: 0.2s;
 
   &:disabled {
@@ -112,6 +125,11 @@ export default {
 
   &--primary {
     background: #2997ff;
+  }
+
+  &--secondary {
+    background: #f2f2f2;
+    color: #2997ff;
   }
 
   &--warning {

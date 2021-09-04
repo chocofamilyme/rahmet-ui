@@ -1,7 +1,10 @@
 <template>
   <div
     class="rahmet-spinner-container"
-    :class="[size !== 'normal' ? `rahmet-spinner-container--${size}` : '']"
+    :class="[
+      size !== 'normal' ? `rahmet-spinner-container--${size}` : '',
+      { 'rahmet-spinner-container--absolute': absolute }
+    ]"
   >
     <div class="rahmet-spinner">
       <div :style="{ borderColor: color }"></div>
@@ -30,6 +33,13 @@ export default {
     color: {
       type: String,
       default: '#2997ff'
+    },
+    /**
+     * Absolute centered vertically and horizontally
+     */
+    absolute: {
+      type: Boolean,
+      default: false
     }
   }
 };
@@ -74,6 +84,13 @@ export default {
   height: 80px;
   margin: auto;
   overflow: hidden;
+
+  &--absolute {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 
   &--large {
     width: 120px;
