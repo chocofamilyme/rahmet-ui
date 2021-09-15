@@ -4,9 +4,9 @@ import { defineComponent } from 'vue';
 import {
   RahmetButton,
   RahmetInput,
-  RahmetSpinner,
   RahmetBottomSheet,
-  RahmetModal
+  RahmetModal,
+  RahmetOverlay
 } from '@/entry.esm';
 
 export default defineComponent({
@@ -14,13 +14,19 @@ export default defineComponent({
   components: {
     RahmetButton,
     RahmetInput,
-    RahmetSpinner,
     RahmetBottomSheet,
-    RahmetModal
+    RahmetModal,
+    RahmetOverlay
   },
   methods: {
     openBottomSheet() {
       this.$refs.sheet.onOpen('test');
+    },
+    toggleOverlay() {
+      this.$refs.overlay.onOpen();
+      setTimeout(() => {
+        this.$refs.overlay.onHide();
+      }, 3000);
     }
   }
 });
@@ -31,7 +37,6 @@ export default defineComponent({
     <h1>Input:</h1>
     <rahmet-input />
     <h1>Spinner:</h1>
-    <rahmet-spinner absolute />
     <rahmet-button @click="openBottomSheet" :borderRadius="6" block>
       Toggle Bottom Sheet
     </rahmet-button>
@@ -50,5 +55,7 @@ export default defineComponent({
         <h1>Testing...</h1>
       </div>
     </rahmet-modal>
+    <rahmet-button block @click="toggleOverlay">Toggle Overlay</rahmet-button>
+    <RahmetOverlay ref="overlay" />
   </div>
 </template>
