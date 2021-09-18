@@ -1,8 +1,8 @@
 import { mount } from '@vue/test-utils';
-import RahmetOverlay from './RahmetOverlay.vue';
+import RahmetBackdrop from './RahmetBackdrop.vue';
 import 'regenerator-runtime/runtime';
 
-describe('RahmetSpinner.vue', () => {
+describe('RahmetBackdrop.vue', () => {
   let wrapper = null;
 
   const createWrapper = (props) => {
@@ -10,7 +10,7 @@ describe('RahmetSpinner.vue', () => {
       ...props
     };
 
-    wrapper = mount(RahmetOverlay, {
+    wrapper = mount(RahmetBackdrop, {
       propsData: defaultProps,
       global: {
         stubs: {
@@ -25,10 +25,10 @@ describe('RahmetSpinner.vue', () => {
     wrapper = null;
   });
 
-  it('opens and closes the overlay', () => {
+  it('opens and closes the backdrop', () => {
     createWrapper();
 
-    // Open overlay
+    // Open backdrop
     expect(wrapper.vm.isVisible).toBeFalsy();
     wrapper.vm.onOpen();
     expect(wrapper.vm.isVisible).toBeTruthy();
@@ -37,7 +37,7 @@ describe('RahmetSpinner.vue', () => {
     const $body = document.querySelector('body');
     expect($body.style.overflow).toBe('hidden');
 
-    // Close overlay
+    // Close backdrop
     window.scrollTo = jest.fn();
     wrapper.vm.onHide();
     expect(wrapper.vm.isVisible).toBeFalsy();
@@ -48,8 +48,8 @@ describe('RahmetSpinner.vue', () => {
     createWrapper();
 
     await wrapper.vm.onOpen();
-    expect(wrapper.classes()).toContain('overlay');
-    expect(wrapper.classes()).toContain('overlay__content');
+    expect(wrapper.classes()).toContain('backdrop');
+    expect(wrapper.classes()).toContain('backdrop__content');
   });
 
   it('updates the loading color and size', () => {
