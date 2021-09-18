@@ -6,7 +6,7 @@ import {
   RahmetInput,
   RahmetBottomSheet,
   RahmetModal,
-  RahmetOverlay
+  RahmetBackdrop
 } from '@/entry.esm';
 
 export default defineComponent({
@@ -16,16 +16,16 @@ export default defineComponent({
     RahmetInput,
     RahmetBottomSheet,
     RahmetModal,
-    RahmetOverlay
+    RahmetBackdrop
   },
   methods: {
     openBottomSheet() {
       this.$refs.sheet.onOpen('test');
     },
-    toggleOverlay() {
-      this.$refs.overlay.onOpen();
+    toggleBackdrop() {
+      this.$refs.backdrop.onOpen();
       setTimeout(() => {
-        this.$refs.overlay.onHide();
+        this.$refs.backdrop.onHide();
       }, 3000);
     }
   }
@@ -55,7 +55,7 @@ export default defineComponent({
         <h1>Testing...</h1>
       </div>
     </rahmet-modal>
-    <rahmet-button block @click="toggleOverlay">Toggle Overlay</rahmet-button>
-    <RahmetOverlay ref="overlay" />
+    <rahmet-button block @click="toggleBackdrop">Toggle Backdrop</rahmet-button>
+    <RahmetBackdrop ref="backdrop" />
   </div>
 </template>

@@ -1,6 +1,6 @@
 <template>
-  <transition name="overlay">
-    <div class="overlay overlay__content" v-if="isVisible">
+  <transition name="backdrop">
+    <div class="backdrop backdrop__content" v-if="isVisible">
       <RahmetSpinner absolute :color="color" :size="size" />
     </div>
   </transition>
@@ -11,7 +11,7 @@ import RahmetSpinner from '@/components/RahmetSpinner/RahmetSpinner.vue';
 import { disablePageScroll, enablePageScroll } from 'scroll-lock';
 
 export default {
-  name: 'RahmetOverlay',
+  name: 'RahmetBackdrop',
   components: {
     RahmetSpinner
   },
@@ -62,7 +62,7 @@ export default {
   bottom: 0px;
 }
 
-.overlay {
+.backdrop {
   @include fixed;
   display: flex;
   justify-content: center;
@@ -92,7 +92,7 @@ export default {
   &__content {
     @include fixed;
     background: rgba(0, 0, 0, 0.7);
-    z-index: 1;
+    z-index: 999;
   }
 }
 </style>
