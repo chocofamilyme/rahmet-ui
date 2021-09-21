@@ -69,6 +69,7 @@ export default defineComponent({
     <rahmet-button @click="showToast">Test</rahmet-button>
 
     <!-- Backdrop -->
+    <h1>Toggle Backdrop:</h1>
     <rahmet-button block @click="toggleBackdrop">Toggle Backdrop</rahmet-button>
     <RahmetBackdrop ref="backdrop" />
   </div>
