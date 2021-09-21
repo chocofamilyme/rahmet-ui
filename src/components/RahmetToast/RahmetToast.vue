@@ -6,11 +6,15 @@
         :key="toast.key"
         class="rahmet-toast"
         :class="[`rahmet-toast--${toast.theme}`]"
+        @click="remove(toast)"
       >
         <div class="rahmet-toast__icon-wrapper">
           <span
             class="rahmet-toast__icon"
             :class="[`rahmet-toast__icon--${toast.theme}`]"
+            :style="
+              toast.icon ? { backgroundImage: `url('${toast.icon}')` } : {}
+            "
           ></span>
         </div>
 
@@ -55,7 +59,7 @@ export default {
      * Adds toast
      */
     add(options = {}) {
-      if (!['success', 'warning', 'error'].includes(options.theme)) {
+      if (!['success', 'info', 'warning', 'error'].includes(options.theme)) {
         return;
       }
 
@@ -63,6 +67,7 @@ export default {
         theme: options.theme,
         title: options.title,
         text: options.text,
+        icon: options.icon,
         key: `${Date.now()}-${Math.random()}`
       };
 
@@ -84,6 +89,12 @@ export default {
      */
     success(options = {}) {
       this.add({ ...options, theme: 'success' });
+    },
+    /**
+     * Adds info toast
+     */
+    info(options = {}) {
+      this.add({ ...options, theme: 'info' });
     },
     /**
      * Adds warning toast
@@ -108,13 +119,18 @@ export default {
   margin-bottom: 12px;
   padding: 12px;
   border-radius: 8px;
+  pointer-events: visible;
 
   &--success {
     background: #22b372;
   }
 
-  &--warning {
+  &--info {
     background: #2997ff;
+  }
+
+  &--warning {
+    background: #ff9d53;
   }
 
   &--error {
@@ -143,6 +159,10 @@ export default {
 
     &--success {
       background-image: url('../../assets/icons/toast-success.svg');
+    }
+
+    &--info {
+      background-image: url('../../assets/icons/toast-info.svg');
     }
 
     &--warning {

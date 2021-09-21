@@ -15,10 +15,11 @@ export default defineComponent({
     openModal() {
       this.$refs.modal.onOpen();
     },
-    showToast() {
-      this.$toast.warning({
+    showToast(theme) {
+      this.$toast.add({
         title: 'Toast',
-        text: 'Notification'
+        text: 'Notification',
+        theme
       });
     },
     toggleBackdrop() {
@@ -66,7 +67,16 @@ export default defineComponent({
 
     <!-- Toast notification -->
     <h1>Show Toast:</h1>
-    <rahmet-button @click="showToast">Test</rahmet-button>
+    <rahmet-button block @click="showToast('success')">Success</rahmet-button>
+    <rahmet-button block theme="secondary" @click="showToast('info')">
+      Info
+    </rahmet-button>
+    <rahmet-button block theme="warning" @click="showToast('warning')">
+      Warning
+    </rahmet-button>
+    <rahmet-button block theme="error" @click="showToast('error')">
+      Error
+    </rahmet-button>
 
     <!-- Backdrop -->
     <h1>Toggle Backdrop:</h1>
