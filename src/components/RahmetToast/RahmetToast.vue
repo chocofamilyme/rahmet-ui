@@ -142,15 +142,15 @@ export default {
     background-size: contain;
 
     &--success {
-      background-image: url('~@/assets/icons/toast-success.svg');
+      background-image: url('../../assets/icons/toast-success.svg');
     }
 
     &--warning {
-      background-image: url('~@/assets/icons/toast-warning.svg');
+      background-image: url('../../assets/icons/toast-warning.svg');
     }
 
     &--error {
-      background-image: url('~@/assets/icons/toast-error.svg');
+      background-image: url('../../assets/icons/toast-error.svg');
     }
 
     &-wrapper {
