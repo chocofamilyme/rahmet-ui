@@ -8,6 +8,7 @@ import resolve from '@rollup/plugin-node-resolve';
 import replace from '@rollup/plugin-replace';
 import babel from '@rollup/plugin-babel';
 import PostCSS from 'rollup-plugin-postcss';
+import url from 'postcss-url';
 import { terser } from 'rollup-plugin-terser';
 import minimist from 'minimist';
 
@@ -58,7 +59,14 @@ const baseConfig = {
         include: /&module=.*\.css$/
       }),
       // Process all `<style>` blocks except `<style module>`.
-      PostCSS({ include: /(?<!&module=.*)\.css$/ }),
+      PostCSS({
+        include: /(?<!&module=.*)\.css$/,
+        plugins: [
+          url({
+            url: 'inline' // Enable inline assets using base64 encoding
+          })
+        ]
+      }),
       commonjs()
     ],
     babel: {
