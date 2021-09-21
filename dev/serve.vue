@@ -20,6 +20,12 @@ export default defineComponent({
         title: 'Toast',
         text: 'Notification'
       });
+    },
+    toggleBackdrop() {
+      this.$refs.backdrop.onOpen();
+      setTimeout(() => {
+        this.$refs.backdrop.onHide();
+      }, 3000);
     }
   }
 });
@@ -37,7 +43,9 @@ export default defineComponent({
 
     <!-- Bottom Sheet -->
     <h1>Toggle Bottom Sheet:</h1>
-    <rahmet-button @click="openBottomSheet">Test</rahmet-button>
+    <rahmet-button @click="openBottomSheet" :borderRadius="6" block>
+      Toggle Bottom Sheet
+    </rahmet-button>
     <rahmet-bottom-sheet name="test" ref="sheet">
       <div>
         <h1 style="height: 50px">Bottom Sheet Text</h1>
@@ -59,5 +67,9 @@ export default defineComponent({
     <!-- Toast notification -->
     <h1>Show Toast:</h1>
     <rahmet-button @click="showToast">Test</rahmet-button>
+
+    <!-- Backdrop -->
+    <rahmet-button block @click="toggleBackdrop">Toggle Backdrop</rahmet-button>
+    <RahmetBackdrop ref="backdrop" />
   </div>
 </template>
