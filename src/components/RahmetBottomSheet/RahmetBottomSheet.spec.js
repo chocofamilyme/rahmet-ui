@@ -87,11 +87,23 @@ describe('RahmetBottomSheet.vue', () => {
     expect(document.body.style.overscrollBehavior).toEqual('auto');
   });
 
-  it('does not round top corners', async () => {
-    createWrapper({
-      rounded: false
+  it('changes top border radius corners', async () => {
+    const borderRadius = '20';
+    await createWrapper({
+      borderRadius
     });
-    expect(wrapper.find('.bottom-sheet-rounded').exists()).toBeFalsy();
+    const contentShift = wrapper.find('.sheet-shift');
+    expect(contentShift.element.style['border-radius']).toBe(
+      `${borderRadius}px ${borderRadius}px 0px 0px`
+    );
+  });
+
+  it('removes the shift', async () => {
+    await createWrapper({
+      isShiftVisible: false
+    });
+
+    expect(wrapper.find('.shift-content').exists()).toBeFalsy();
   });
 
   it('checks whether sheet touch move', async () => {
