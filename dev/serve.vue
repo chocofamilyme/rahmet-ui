@@ -47,9 +47,11 @@ export default defineComponent({
     <rahmet-button @click="openBottomSheet" :borderRadius="6" block>
       Toggle Bottom Sheet
     </rahmet-button>
-    <rahmet-bottom-sheet name="test" ref="sheet">
+    <rahmet-bottom-sheet name="test" ref="sheet" borderRadius="40">
       <div>
         <h1 style="height: 50px">Bottom Sheet Text</h1>
+        <rahmet-input v-model="inputValue" />
+
         <rahmet-spinner />
       </div>
     </rahmet-bottom-sheet>
