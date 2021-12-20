@@ -11,17 +11,17 @@
       <div class="sheet" style="max-height: 95%">
         <div
           :style="{
-            transform: `translateY(${sheetShift}px)`,
-            borderRadius: `${borderRadius}px ${borderRadius}px 0px 0px`
+            transform: `translateY(${sheetShift}px)`
           }"
           class="sheet-shift"
+          :class="{ 'bottom-sheet-rounded': rounded }"
           role="dialog"
           aria-modal="true"
           @touchstart.passive="onSheetTouchStart"
           @touchmove.passive="onSheetTouchMove"
           @touchend="onSheetTouchEnd"
         >
-          <div class="shift-content" @click="onHide" v-if="isShiftVisible">
+          <div class="shift-content" @click="onHide">
             <div :style="{ 'background-color': shiftColor }"></div>
           </div>
           <div
@@ -57,9 +57,9 @@ export default {
     /**
      * Rounded top corners
      */
-    borderRadius: {
-      type: String,
-      default: '15'
+    rounded: {
+      type: Boolean,
+      default: true
     },
     /**
      * Background overlay
@@ -88,13 +88,6 @@ export default {
     shiftColor: {
       type: String,
       default: '#e0e0e0'
-    },
-    /**
-     * Shift visibility
-     */
-    isShiftVisible: {
-      type: Boolean,
-      default: true
     }
   },
   data() {
@@ -251,6 +244,10 @@ export default {
   &-enter-from > .sheet,
   &-leave-to > .sheet {
     transform: translateY(100%);
+  }
+
+  &-rounded {
+    border-radius: 15px 15px 0px 0px;
   }
 
   &-overlay {
