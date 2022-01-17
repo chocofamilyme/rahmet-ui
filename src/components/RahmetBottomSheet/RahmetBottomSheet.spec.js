@@ -56,6 +56,7 @@ describe('RahmetBottomSheet.vue', () => {
       sheetShift: 500
     });
     await wrapper.vm.onSheetTouchEnd();
+    expect(wrapper.emitted().onCancel).toBeTruthy();
     expect(wrapper.vm.bottomSheet.activeName).toEqual('');
   });
 

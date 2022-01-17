@@ -6,7 +6,7 @@
         :class="{ 'bottom-sheet-overlay': overlay }"
         @touchstart.passive="onBlackoutTouchStart"
         @touchend="onBlackoutTouchEnd"
-        v-on="innerWidth >= 550 ? { click: onHide } : {}"
+        v-on="innerWidth >= 550 ? { click: onCancel } : {}"
       ></div>
       <div class="sheet" style="max-height: 95%">
         <div
@@ -21,7 +21,7 @@
           @touchmove.passive="onSheetTouchMove"
           @touchend="onSheetTouchEnd"
         >
-          <div class="shift-content" @click="onHide" v-if="isShiftVisible">
+          <div class="shift-content" @click="onCancel" v-if="isShiftVisible">
             <div :style="{ 'background-color': shiftColor }"></div>
           </div>
           <div
@@ -97,6 +97,16 @@ export default {
       default: true
     }
   },
+  emits: [
+    /**
+     * Triggers when the user closes the bottom sheet manually
+     **/
+    'onCancel',
+    /**
+     * Triggers when the bottom sheet is closed completely
+     **/
+    'onClose'
+  ],
   data() {
     return {
       blackoutTouchStarted: false,
@@ -128,6 +138,10 @@ export default {
     window.removeEventListener('resize', this.setInnerWidth);
   },
   methods: {
+    onCancel() {
+      this.$emit('onCancel');
+      this.onHide();
+    },
     setInnerWidth() {
       this.innerWidth = window.innerWidth;
     },
@@ -147,7 +161,7 @@ export default {
     onBlackoutTouchEnd() {
       if (this.blackoutTouchStarted) {
         this.blackoutTouchStarted = false;
-        this.onHide();
+        this.onCancel();
       }
     },
     onSheetTouchStart(e) {
@@ -164,7 +178,7 @@ export default {
       const shift = parseInt(this.sheetShift, 10);
 
       if (this.sheetTouchStarted && shift >= this.shiftMinHeight) {
-        this.onHide();
+        this.onCancel();
       }
 
       this.sheetTouchStarted = false;
@@ -255,7 +269,7 @@ export default {
 
   &-overlay {
     background: #000000;
-    opacity: 0.7;
+    opacity: 0.6;
   }
 
   &-modal {

@@ -107,7 +107,7 @@ export default {
   }
 
   &-leave-active {
-    transition: opacity 0.2s;
+    transition: opacity 0.2s ease-out;
   }
 
   &-content {
@@ -134,7 +134,7 @@ export default {
   &-overlay {
     @include fixed;
     pointer-events: all;
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, 0.6);
     z-index: 1;
   }
 
