@@ -1,7 +1,10 @@
 <template>
   <transition name="backdrop">
     <div class="backdrop backdrop__content" v-if="isVisible">
-      <RahmetSpinner absolute :color="color" :size="size" />
+      <div v-if="itHasSlot">
+        <slot name="spinner"></slot>
+      </div>
+      <RahmetSpinner v-else absolute :color="color" :size="size" />
     </div>
   </transition>
 </template>
@@ -49,6 +52,11 @@ export default {
       this.isVisible = false;
       enablePageScroll();
     }
+  },
+  computed: {
+    itHasSlot() {
+      return !!this.$slots.spinner;
+    }
   }
 };
 </script>
@@ -68,7 +76,7 @@ export default {
   justify-content: center;
   align-items: center;
   z-index: 999;
-  pointer-events: none;
+  pointer-events: all;
   overflow: auto;
 
   &-enter-from,
@@ -86,12 +94,12 @@ export default {
   }
 
   &-leave-active {
-    transition: opacity 0.2s;
+    transition: opacity 0.2s ease-out;
   }
 
   &__content {
     @include fixed;
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, 0.6);
     z-index: 999;
   }
 }
